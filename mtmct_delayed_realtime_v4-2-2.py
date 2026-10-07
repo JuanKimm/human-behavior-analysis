@@ -263,6 +263,7 @@ class Observation:
     match_details: dict = field(default_factory=dict)
     position_anchor_ok: bool | None = None
     position_anchor_reason: str = "unassessed"
+    detector_index: int = -1
 
     @property
     def key(self):
@@ -886,7 +887,7 @@ def detect_batch(model, encoder, packet, calibration, trackers, ticks, args, cfg
             raw_count = len(boxes)
             boxes, scores = boxes[keep], scores[keep]
             rows = []
-            for box, score in zip(boxes, scores):
+            for detector_index, box, score in zip(keep, boxes, scores):
                 box = np.asarray(box, np.float32).copy()
                 box[[0, 2]] = np.clip(box[[0, 2]], 0, w)
                 box[[1, 3]] = np.clip(box[[1, 3]], 0, h)
@@ -906,6 +907,7 @@ def detect_batch(model, encoder, packet, calibration, trackers, ticks, args, cfg
                 obs = Observation(cam, packet.indices[cam], packet.times[cam], box, float(score),
                                   quality, position_quality, calibration.project(cam, foot, (w, h)),
                                   color=clothing_descriptor(crop), image_size=(w, h))
+                obs.detector_index = int(detector_index)
                 rows.append(obs)
             prepare_occlusions(trackers[cam], rows, cfg)
             rows = [obs for obs in rows if association_observation_ok(obs, cfg)]

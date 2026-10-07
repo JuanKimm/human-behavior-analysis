@@ -1,0 +1,17 @@
+# Direct integration dependencies. This is not a full transitive/platform wheel lock.
+# Keep original requirements.txt and legacy entry points unchanged.
+numpy==2.2.6
+opencv-python==4.11.0.86
+ultralytics==8.4.70
+torch==2.13.0
+torchvision==0.28.0
+scikit-learn==1.8.0
+lap==0.5.12
+Cython==3.1.3
+gdown==5.2.0
+tensorboard==2.20.0
+yacs==0.1.8
+h5py==3.14.0
+imageio==2.37.0
+# Then install official torchreid (requires a C compiler):
+# pip install --no-deps --no-build-isolation "torchreid @ git+https://github.com/KaiyangZhou/deep-person-reid.git@f8cd150fdf77e8d9e1ed143b7f308c2c609ded50"
