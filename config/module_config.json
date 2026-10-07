@@ -1,0 +1,157 @@
+{
+  "module_version": "0.2.1-candidate.002",
+  "device": "auto",
+  "pose_backend": "yolo26x",
+  "paths": {
+    "yolo_weights": "assets/yolo/yolo26x-pose.pt",
+    "videopose3d_weights": "assets/videopose3d/pretrained_h36m_detectron_coco.bin",
+    "tcn_checkpoint": "checkpoints/tcn/best.pt",
+    "stds_checkpoint": "checkpoints/stds/best.pt",
+    "dbn_checkpoint": "checkpoints/dbn/final_dbn.npz"
+  },
+  "pose": {
+    "num_joints": 17,
+    "person_selection": "first_detection",
+    "no_detection_fill": "zeros"
+  },
+  "videopose3d": {
+    "filter_widths": [
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "causal": false,
+    "channels": 1024,
+    "input_format": "COCO17 detector coordinates",
+    "checkpoint": "pretrained_h36m_detectron_coco.bin",
+    "receptive_field_frames": 243
+  },
+  "skeleton": {
+    "shape": [
+      17,
+      3
+    ],
+    "post_videopose3d_normalization": "none",
+    "note": "Training dataset builders loaded VideoPose3D keypoints_3d directly as float32. V1 therefore performs only shape/dtype validation after 3D lifting."
+  },
+  "runtime": {
+    "tcn_window": 16,
+    "tcn_stride": 8,
+    "stds_window": 64,
+    "stds_stride": 16,
+    "dbn_stride": 16,
+    "tcn_labels": [
+      "Non-Danger",
+      "Danger"
+    ],
+    "dbn_labels": [
+      "Normal",
+      "Precursor",
+      "Danger"
+    ],
+    "stds_labels": [
+      "Normal",
+      "Precursor",
+      "Danger"
+    ]
+  },
+  "training_reference": {
+    "tcn": "16F / stride4 for Train-Val-Test clip generation",
+    "stds_train": "64F / coarse stride8 + precursor dense stride2",
+    "stds_validation": "64F / stride8 in repeated training code",
+    "stds_final_test": "64F / stride16",
+    "dbn_train_test": "64F observations / stride16"
+  },
+  "_runtime_applied_keys": [
+    "paths.*",
+    "device",
+    "runtime.*",
+    "pose.*",
+    "pose_quality.*",
+    "videopose3d.filter_widths",
+    "videopose3d.causal",
+    "videopose3d.channels",
+    "videopose3d.receptive_field_frames",
+    "checkpoint_contract.*",
+    "versions.*",
+    "output.*",
+    "evaluation.*",
+    "environment_contract.*"
+  ],
+  "_record_only_keys": {
+    "videopose3d.input_format": "checkpoint/data provenance description",
+    "videopose3d.checkpoint": "redundant human-readable asset name; paths.videopose3d_weights is authoritative",
+    "skeleton.*": "shape/dtype contract",
+    "training_reference.*": "training-time provenance; does not change runtime behavior"
+  },
+  "pose_quality": {
+    "min_detected_ratio": 0.5,
+    "min_valid_joint_ratio": 0.5,
+    "confidence_threshold": 0.25,
+    "thresholds_provisional": true,
+    "low_quality_dbn_policy": "reset_state_and_emit_insufficient_pose"
+  },
+  "versions": {
+    "package_version": "0.2.1-candidate.002",
+    "model_bundle_id": "repeat01_seed42",
+    "dataset_version": "unified3d_labels_v1_provisional",
+    "split_id": "repeat01_seed42",
+    "output_schema_version": "2.0"
+  },
+  "checkpoint_contract": {
+    "tcn_window": 16,
+    "tcn_stride": 8,
+    "stds_window": 64,
+    "stds_stride": 16,
+    "dbn_stride": 16
+  },
+  "output": {
+    "run_suffix_digits": 3,
+    "overwrite_default": false,
+    "profiles": [
+      "research",
+      "product"
+    ],
+    "default_profile": "research"
+  },
+  "evaluation": {
+    "frame_indexing": "zero_based_inclusive",
+    "warmup": "N/A",
+    "projection": "hold_last",
+    "gt_attach_stage": "after_inference"
+  },
+  "environment_contract": {
+    "profile_id": "pc_colab_preprocessing_v1",
+    "scope": "raw_video",
+    "required_import_versions": {
+      "numpy": "2.2.6",
+      "opencv": "4.11.0",
+      "ultralytics": "8.4.70"
+    },
+    "required_distribution_versions": {
+      "numpy": "2.2.6",
+      "opencv-python": "4.11.0.86",
+      "ultralytics": "8.4.70"
+    },
+    "torch_policy": "platform_specific_validated_range",
+    "torch_range": ">=2.11,<2.14",
+    "torchvision_range": ">=0.26,<0.29",
+    "validated_examples": {
+      "local_cpu": {
+        "python": "3.12.10",
+        "torch": "2.13.0+cpu",
+        "torchvision": "0.28.0+cpu",
+        "scikit-learn": "1.8.0"
+      },
+      "colab_cuda": {
+        "python": "3.13.15",
+        "torch": "2.11.0+cu128",
+        "torchvision": "0.26.0+cu128",
+        "scikit-learn": "1.6.1"
+      }
+    },
+    "evidence_note": "Video (2) local CPU and aligned Colab CUDA produced identical detected mask, pose-quality ratios, and TCN/ST-DS/DBN labels/transitions after aligning numpy/opencv/ultralytics."
+  }
+}

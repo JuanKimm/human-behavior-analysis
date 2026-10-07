@@ -1,0 +1,34 @@
+# Python 캐시
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# 가상환경
+.venv/
+venv/
+
+# 환경변수 및 비밀 설정
+.env
+.env.*
+!.env.example
+
+# 모델 가중치
+checkpoints/
+*.pt
+*.pth
+*.onnx
+*.engine
+*.bin
+
+# 실행 결과 및 데이터
+outputs/
+*.npz
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# 운영체제 임시 파일
+.DS_Store
+Thumbs.db

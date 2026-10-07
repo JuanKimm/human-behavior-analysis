@@ -1,0 +1,10 @@
+# DD-R01 validated PC/Colab runtime constraints.
+# Raw-video reproducibility depends on the exact preprocessing trio below.
+# Torch/torchvision remain platform-specific because Windows CPU and Colab CUDA use different builds;
+# semantic parity was demonstrated after the preprocessing trio was aligned.
+numpy==2.2.6
+opencv-python==4.11.0.86
+ultralytics==8.4.70
+torch>=2.11,<2.14
+torchvision>=0.26,<0.29
+scikit-learn>=1.6,<2

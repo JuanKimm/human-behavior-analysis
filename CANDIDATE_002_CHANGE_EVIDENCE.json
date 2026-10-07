@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "from_candidate": "0.2.0-candidate.001",
+  "to_candidate": "0.2.1-candidate.002",
+  "change_scope": "environment reproducibility lock + provenance/guides/tests/version metadata; no model algorithm/checkpoint replacement",
+  "added_files": [
+    "docs/ENVIRONMENT_REPRODUCIBILITY.md",
+    "src/runtime/environment_contract.py",
+    "tests/test_environment_contract.py"
+  ],
+  "removed_files": [],
+  "changed_files": [
+    "CURRENT_VALIDATION_STATUS.md",
+    "GATE2_CHANGELOG.md",
+    "README_FIRST_KR.md",
+    "check_module.py",
+    "config/module_config.json",
+    "docs/RUN_GUIDE_COLAB_KR.md",
+    "docs/RUN_GUIDE_LOCAL_KR.md",
+    "pyproject.toml",
+    "requirements.txt",
+    "src/runtime/provenance.py",
+    "src/runtime/video_pipeline.py"
+  ],
+  "protected_assets_unchanged": {
+    "assets/yolo/yolo26x-pose.pt": true,
+    "assets/videopose3d/pretrained_h36m_detectron_coco.bin": true,
+    "checkpoints/tcn/best.pt": true,
+    "checkpoints/stds/best.pt": true,
+    "checkpoints/dbn/final_dbn.npz": true
+  },
+  "core_algorithm_sources_unchanged": {
+    "src/runtime/engine.py": true,
+    "src/preprocessing/yolo_pose.py": true,
+    "src/preprocessing/videopose3d.py": true,
+    "src/preprocessing/videopose3d_model.py": true,
+    "src/tcn/model.py": true,
+    "src/stds/model_hybrid.py": true,
+    "src/dbn/model_dbn.py": true
+  }
+}

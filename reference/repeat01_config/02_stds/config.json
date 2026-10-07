@@ -1,0 +1,23 @@
+{
+  "stage": "Frozen TCN + ST-DS-Transformer + CRF",
+  "seed": 42,
+  "split_json": "/content/drive/MyDrive/Colab/260917논문/environment_holdout_pipeline/runs/repeat_01_seed42/split.json",
+  "split_ratio": {
+    "train": 0.7,
+    "val": 0.15,
+    "test": 0.15
+  },
+  "tcn_checkpoint": "/content/drive/MyDrive/Colab/260917논문/environment_holdout_pipeline/runs/repeat_01_seed42/01_tcn/best.pt",
+  "tcn_frozen": true,
+  "train_windows": 15280,
+  "val_windows": 2212,
+  "reserved_test_videos": 43,
+  "window": 64,
+  "stride_coarse": 8,
+  "stride_dense": 2,
+  "epochs": 80,
+  "patience": 15,
+  "device": "cuda",
+  "gpu": "Tesla T4",
+  "timestamp": "2026-09-17T03:59:12"
+}

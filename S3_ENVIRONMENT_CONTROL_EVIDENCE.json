@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "validation_video_key": "3AI_Office_01::Video (2)",
+  "video_sha256": "683a4242fa0b6d645b1153b67145577e3768bc200d443625afd2d610438c92a4",
+  "local_diagnostic_zip_sha256": "f858146cfdf614f53967eb39abf3f4013709809fe5a177f5717e300d69bf2d52",
+  "aligned_colab_cuda_diagnostic_zip_sha256": "3cdff91c00e551adeab4060d66bd154cfe58f63dea1f1afb38a0509f39a099b8",
+  "validated_preprocessing_versions": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "ultralytics": "8.4.70"
+  },
+  "local_packages": {
+    "numpy": "2.2.6",
+    "torch": "2.13.0",
+    "torchvision": "0.28.0",
+    "opencv-python": "4.11.0.86",
+    "opencv-python-headless": null,
+    "ultralytics": "8.4.70",
+    "scikit-learn": "1.8.0"
+  },
+  "colab_cuda_packages": {
+    "numpy": "2.2.6",
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "opencv-python": "4.11.0.86",
+    "opencv-python-headless": null,
+    "ultralytics": "8.4.70",
+    "scikit-learn": "1.6.1"
+  },
+  "pose_quality_equal": true,
+  "array_comparison": {
+    "keypoints_2d": {
+      "shape_equal": true,
+      "exact_equal": false,
+      "max_abs_diff": 0.00146484375,
+      "different_elements": 5410
+    },
+    "confidence": {
+      "shape_equal": true,
+      "exact_equal": false,
+      "max_abs_diff": 5.513429641723633e-06,
+      "different_elements": 2615
+    },
+    "detected": {
+      "shape_equal": true,
+      "exact_equal": true
+    },
+    "skeletons_3d": {
+      "shape_equal": true,
+      "exact_equal": false,
+      "max_abs_diff": 5.960464477539062e-07,
+      "different_elements": 14119
+    }
+  },
+  "semantic_transitions_local": {
+    "tcn": {
+      "decision_frame": 191,
+      "label": "Danger",
+      "probabilities": [
+        0.27973470091819763,
+        0.7202653288841248
+      ],
+      "status": "ok"
+    },
+    "stds_pre": {
+      "decision_frame": 175,
+      "label": "Precursor",
+      "probabilities": [
+        0.37591084837913513,
+        0.623337984085083,
+        0.0007512260926887393
+      ],
+      "status": "ok"
+    },
+    "dbn": {
+      "decision_frame": 191,
+      "label": "Precursor",
+      "probabilities": [
+        0.0038216203879016296,
+        0.6290966559923954,
+        0.367081723619703
+      ],
+      "status": "ok"
+    }
+  },
+  "semantic_transitions_colab_cuda": {
+    "tcn": {
+      "decision_frame": 191,
+      "label": "Danger",
+      "probabilities": [
+        0.27973490953445435,
+        0.7202650904655457
+      ],
+      "status": "ok"
+    },
+    "stds_pre": {
+      "decision_frame": 175,
+      "label": "Precursor",
+      "probabilities": [
+        0.37591126561164856,
+        0.6233375072479248,
+        0.00075122294947505
+      ],
+      "status": "ok"
+    },
+    "dbn": {
+      "decision_frame": 191,
+      "label": "Precursor",
+      "probabilities": [
+        0.0038216386220144413,
+        0.6290959589834151,
+        0.3670824023945706
+      ],
+      "status": "ok"
+    }
+  },
+  "semantic_transition_equal": true,
+  "conclusion": "After aligning NumPy/OpenCV/Ultralytics, Local CPU and Colab CUDA matched detected mask, pose-quality ratios, and TCN/ST-DS/DBN semantic transition frames; residual floating-point differences did not change labels/transitions."
+}

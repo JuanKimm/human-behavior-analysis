@@ -1,0 +1,560 @@
+{
+  "original_file_count": 81,
+  "original_manifest_entry_count": 58,
+  "original_manifest_unlisted_original_files": [
+    "MANIFEST.json",
+    "dbn_train_observations.csv",
+    "outputs/Video (14)_result.json",
+    "src/dbn/__pycache__/__init__.cpython-313.pyc",
+    "src/dbn/__pycache__/model_dbn.cpython-313.pyc",
+    "src/preprocessing/__pycache__/__init__.cpython-313.pyc",
+    "src/preprocessing/__pycache__/skeleton.cpython-313.pyc",
+    "src/preprocessing/__pycache__/videopose3d.cpython-313.pyc",
+    "src/preprocessing/__pycache__/videopose3d_model.cpython-313.pyc",
+    "src/preprocessing/__pycache__/yolo_pose.cpython-313.pyc",
+    "src/runtime/__pycache__/__init__.cpython-313.pyc",
+    "src/runtime/__pycache__/dbn_filter.cpython-313.pyc",
+    "src/runtime/__pycache__/engine.cpython-313.pyc",
+    "src/runtime/__pycache__/env_info.cpython-313.pyc",
+    "src/runtime/__pycache__/schemas.cpython-313.pyc",
+    "src/runtime/__pycache__/video_pipeline.cpython-313.pyc",
+    "src/stds/__pycache__/__init__.cpython-313.pyc",
+    "src/stds/__pycache__/model_hybrid.cpython-313.pyc",
+    "src/tcn/__pycache__/__init__.cpython-313.pyc",
+    "src/tcn/__pycache__/model.cpython-313.pyc",
+    "tests/videos/Video (14).mp4",
+    "tools/parity_check.py",
+    "unified_3d_all_envs.npz"
+  ],
+  "original_manifest_mismatches": [
+    {
+      "path": "Colab_Run_Module.ipynb",
+      "manifest_size": 1746,
+      "actual_size": 7278,
+      "manifest_sha256": "a3b7c7deb11b3163a997fad2dc7cd6582300cc6295870517fa248e2846db372c",
+      "actual_sha256": "7c80ce279788a5803df23cc14bf5d374374146eec57d2160c07b448e787ee174"
+    }
+  ],
+  "final_file_count_excluding_this_manifest": 88,
+  "added_files": [
+    "PHASE1_CHANGELOG.md",
+    "PHASE1_FINAL_MANIFEST.json",
+    "PHASE1_ORIGINAL_INVENTORY.json",
+    "PHASE1_ORIGINAL_MANIFEST.json",
+    "PHASE1_TEST_RESULTS.md",
+    "src/runtime/json_io.py",
+    "tests/test_phase1.py"
+  ],
+  "modified_original_files": [
+    "Colab_Run_Module.ipynb",
+    "README_FIRST_KR.md",
+    "check_module.py",
+    "config/module_config.json",
+    "reference/preprocessing_original/build_fall_dataset_3d_stride8_win16.py",
+    "reference/preprocessing_original/build_fall_dataset_win64_stride8.py",
+    "reference/preprocessing_original/build_unified_3d.py",
+    "reference/preprocessing_original/run_videopose3d.py",
+    "reference/repeat01_config/split.json",
+    "reference/training_code/dbn/data_dbn.py",
+    "reference/training_code/dbn/final_test.py",
+    "reference/training_code/dbn/pipeline.py",
+    "reference/training_code/dbn/train_dbn.py",
+    "reference/training_code/stds/data_unified.py",
+    "reference/training_code/stds/model_hybrid.py",
+    "reference/training_code/stds/train_hybrid_core.py",
+    "reference/training_code/stds/train_stds.py",
+    "reference/training_code/tcn/data_st.py",
+    "reference/training_code/tcn/train_core.py",
+    "run_3d_npz.py",
+    "run_video.py",
+    "src/dbn/model_dbn.py",
+    "src/preprocessing/videopose3d.py",
+    "src/preprocessing/yolo_pose.py",
+    "src/runtime/engine.py",
+    "src/runtime/env_info.py",
+    "src/runtime/schemas.py",
+    "src/runtime/video_pipeline.py",
+    "src/stds/model_hybrid.py"
+  ],
+  "removed_original_files": [],
+  "protected_models": [
+    {
+      "path": "assets/yolo/yolo26x-pose.pt",
+      "size_bytes": 126242553,
+      "sha256": "08ed9e01d22a6f248b04f2f9992016aca9a32250b9ab57057d886a09d026700d",
+      "matches_original": true
+    },
+    {
+      "path": "assets/videopose3d/pretrained_h36m_detectron_coco.bin",
+      "size_bytes": 67892577,
+      "sha256": "d3219e005b50591f694da5cbaf6849f060d6b2cf895864a779f8a992ac63a232",
+      "matches_original": true
+    },
+    {
+      "path": "checkpoints/tcn/best.pt",
+      "size_bytes": 7904978,
+      "sha256": "6eb1a9216f2dd67a3c8d445a3801f3f7877613ff14f15b21cd5c672ea51fcad2",
+      "matches_original": true
+    },
+    {
+      "path": "checkpoints/stds/best.pt",
+      "size_bytes": 9097963,
+      "sha256": "beb548f5ba52978febf3aac8f58b89ebec1ab8cb2505ad195fe7745e0d9abc5c",
+      "matches_original": true
+    },
+    {
+      "path": "checkpoints/dbn/final_dbn.npz",
+      "size_bytes": 8421,
+      "sha256": "7d80e3aebed9df353539d61a9eae8a749e7ce36d5c886f51271ed246fc4a78a7",
+      "matches_original": true
+    }
+  ],
+  "files": [
+    {
+      "path": "Colab_Run_Module.ipynb",
+      "size_bytes": 8985,
+      "sha256": "53a3fe23f83c057fc826ab7d7b790910acb8c13b86a630486fb30810d7552ab7"
+    },
+    {
+      "path": "MANIFEST.json",
+      "size_bytes": 9501,
+      "sha256": "b23527d61f7e392ef87ffdfc6920c29601d5879b5724da06a631129b2f160637"
+    },
+    {
+      "path": "PHASE1_CHANGELOG.md",
+      "size_bytes": 4772,
+      "sha256": "01b4ad7b0db1e888d6f6ce8dfc51f2b2f567bda044046b9655bf4a4d91a60526"
+    },
+    {
+      "path": "PHASE1_FINAL_MANIFEST.json",
+      "size_bytes": 17604,
+      "sha256": "189034162bc95b7aee2457495232500953fe1c6c69ab2cbf7d537507e64fb02e"
+    },
+    {
+      "path": "PHASE1_ORIGINAL_INVENTORY.json",
+      "size_bytes": 13486,
+      "sha256": "b46925c88c6fa3e1e43590df35a1816b539b5e5ce8a21287107a0d8ec781d7fe"
+    },
+    {
+      "path": "PHASE1_ORIGINAL_MANIFEST.json",
+      "size_bytes": 9501,
+      "sha256": "b23527d61f7e392ef87ffdfc6920c29601d5879b5724da06a631129b2f160637"
+    },
+    {
+      "path": "PHASE1_TEST_RESULTS.md",
+      "size_bytes": 1518,
+      "sha256": "a94b83ee3f97c55eb94b3b28caefb2fc1e11a338fd04c957a9ff059f949ce74b"
+    },
+    {
+      "path": "README_FIRST_KR.md",
+      "size_bytes": 6224,
+      "sha256": "7c13b51dce7997f5828f22c568d4b4249ab4487f2550fc95b881e58398a6fc8b"
+    },
+    {
+      "path": "assets/videopose3d/pretrained_h36m_detectron_coco.bin",
+      "size_bytes": 67892577,
+      "sha256": "d3219e005b50591f694da5cbaf6849f060d6b2cf895864a779f8a992ac63a232",
+      "matches_original": true
+    },
+    {
+      "path": "assets/yolo/yolo26x-pose.pt",
+      "size_bytes": 126242553,
+      "sha256": "08ed9e01d22a6f248b04f2f9992016aca9a32250b9ab57057d886a09d026700d",
+      "matches_original": true
+    },
+    {
+      "path": "check_module.py",
+      "size_bytes": 3387,
+      "sha256": "9fb1cff29ea3f811530193c581d139f7d304fec8153fa5b512c8739cf8bb5422"
+    },
+    {
+      "path": "checkpoints/dbn/final_dbn.npz",
+      "size_bytes": 8421,
+      "sha256": "7d80e3aebed9df353539d61a9eae8a749e7ce36d5c886f51271ed246fc4a78a7",
+      "matches_original": true
+    },
+    {
+      "path": "checkpoints/stds/best.pt",
+      "size_bytes": 9097963,
+      "sha256": "beb548f5ba52978febf3aac8f58b89ebec1ab8cb2505ad195fe7745e0d9abc5c",
+      "matches_original": true
+    },
+    {
+      "path": "checkpoints/tcn/best.pt",
+      "size_bytes": 7904978,
+      "sha256": "6eb1a9216f2dd67a3c8d445a3801f3f7877613ff14f15b21cd5c672ea51fcad2",
+      "matches_original": true
+    },
+    {
+      "path": "config/module_config.json",
+      "size_bytes": 2492,
+      "sha256": "8ec3d5fe75f11bbef186085d70b2860b665badb7fd7669f532f100891d274572"
+    },
+    {
+      "path": "dbn_train_observations.csv",
+      "size_bytes": 1100069,
+      "sha256": "8182066100e03b591e19c58d057541d9d2e79da36f4f10c39f84871be3b9bf46"
+    },
+    {
+      "path": "outputs/.gitkeep",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/Video (14)_result.json",
+      "size_bytes": 23533,
+      "sha256": "1e261d09f1b4aa9af446ab99328a75d35f0a303d4a6e20d58174b6987d0cf941"
+    },
+    {
+      "path": "reference/preprocessing_original/build_fall_dataset_3d_stride8_win16.py",
+      "size_bytes": 9304,
+      "sha256": "58e292724fab6973bcea6e6f6c70f8a0d1979e4f2ff016058ebbadd8f8bf741b"
+    },
+    {
+      "path": "reference/preprocessing_original/build_fall_dataset_win64_stride8.py",
+      "size_bytes": 11863,
+      "sha256": "01022766075c2466c42296b7d2205868acee8102b23f5a7241a1e945f7fa52c1"
+    },
+    {
+      "path": "reference/preprocessing_original/build_unified_3d.py",
+      "size_bytes": 12057,
+      "sha256": "0f370da90a9315f46dee0dbf38736f8cb5dfbc39109397d83fc714d17836dd21"
+    },
+    {
+      "path": "reference/preprocessing_original/convert_coco_to_h36m.py",
+      "size_bytes": 9696,
+      "sha256": "cd329728a91e61c7aca4906e9d2777445d0d08419346b4cd0eec52c29412528a"
+    },
+    {
+      "path": "reference/preprocessing_original/extract_keypoints_2d.py",
+      "size_bytes": 7892,
+      "sha256": "2f37a31225f0be7fd357f5463bfec7b553c48d52d3d59abcf7b089e8517e82e3"
+    },
+    {
+      "path": "reference/preprocessing_original/merge_confidence_into_3d.py",
+      "size_bytes": 3663,
+      "sha256": "c829193a0879530eb8b26e7fe830f965ad9467edb2b44ecd5f9015b82ac3a84d"
+    },
+    {
+      "path": "reference/preprocessing_original/run_videopose3d.py",
+      "size_bytes": 8112,
+      "sha256": "e8ae97367a4b1066ded72aada1274f12e5b024c1c01078872a2a2a4be134a736"
+    },
+    {
+      "path": "reference/repeat01_config/01_tcn/config.json",
+      "size_bytes": 526,
+      "sha256": "e0f0ea77923f9504c5e91d37334f572b17aa74e30f43845f3130fa0ef2a501ae"
+    },
+    {
+      "path": "reference/repeat01_config/02_stds/config.json",
+      "size_bytes": 694,
+      "sha256": "9b9ba4e1725b393b1cea1f89356d83da6971b5225818b30cde3153d61c22a133"
+    },
+    {
+      "path": "reference/repeat01_config/split.json",
+      "size_bytes": 23959,
+      "sha256": "5f40369c0ae27491fd3da8d80c001f454def60cd337e96c2cfab504468ff4fee"
+    },
+    {
+      "path": "reference/training_code/dbn/__init__.py",
+      "size_bytes": 53,
+      "sha256": "fc484882f7825f4ffef06a70dc895a29a3dc1b490ce636f25f3c12344a2c3628"
+    },
+    {
+      "path": "reference/training_code/dbn/data_dbn.py",
+      "size_bytes": 3465,
+      "sha256": "b0307615bbab2f9f93dddab2a1b8deb92ee78885f8b5e6eb75173eb96e006002"
+    },
+    {
+      "path": "reference/training_code/dbn/final_test.py",
+      "size_bytes": 391,
+      "sha256": "a4323fe79bf8c864e4e6795519e32977facda09907e86dbfa04fb4f0db57366a"
+    },
+    {
+      "path": "reference/training_code/dbn/metrics.py",
+      "size_bytes": 4251,
+      "sha256": "e840a9fa0ffa8fcd63e67fa8c1f37c7f591587668b6f71b41f1e58ee82cb915b"
+    },
+    {
+      "path": "reference/training_code/dbn/model_dbn.py",
+      "size_bytes": 11273,
+      "sha256": "df1a47241e4f9f2d88b540e18a264065a8b942d8942f33759b332595f122b419"
+    },
+    {
+      "path": "reference/training_code/dbn/pipeline.py",
+      "size_bytes": 7347,
+      "sha256": "8eb0c91c65e8913b8a921ff4defdf15125e6755d2ca6dd9406af12c74ef9fa61"
+    },
+    {
+      "path": "reference/training_code/dbn/train_dbn.py",
+      "size_bytes": 389,
+      "sha256": "a706b0a97d36c04dd02352d948e0be507dab6f708634b3b99715e0b59e01e111"
+    },
+    {
+      "path": "reference/training_code/stds/__init__.py",
+      "size_bytes": 59,
+      "sha256": "d50e2e0f5e07acb68e4d99757a5586d1ad1e38cf76d280c2558268a8675a4568"
+    },
+    {
+      "path": "reference/training_code/stds/data_unified.py",
+      "size_bytes": 6885,
+      "sha256": "0604f950ed3e35bb2eaf2fe660dbabb547c29e35e3da54172bf19bd0844e55f3"
+    },
+    {
+      "path": "reference/training_code/stds/model_hybrid.py",
+      "size_bytes": 11240,
+      "sha256": "552f9f214e09b44a4d76446e0ada2053895d8d0ba23a3b5e3f787bb1fa6911e5"
+    },
+    {
+      "path": "reference/training_code/stds/train_hybrid_core.py",
+      "size_bytes": 12246,
+      "sha256": "fe94eeb6ce22fe96f2bf4aed57bb3199f11c154fc6bb6a300edb3e02227ba789"
+    },
+    {
+      "path": "reference/training_code/stds/train_stds.py",
+      "size_bytes": 1136,
+      "sha256": "262fb0861e6f1a932314263207042154afda269f2daf3bcfc247e735c6f22abc"
+    },
+    {
+      "path": "reference/training_code/tcn/__init__.py",
+      "size_bytes": 64,
+      "sha256": "24583b751a77894822d11dade94e9e15f2c757110b7a4429a2539568ee7b7b42"
+    },
+    {
+      "path": "reference/training_code/tcn/data_st.py",
+      "size_bytes": 5082,
+      "sha256": "d0098f7519cd57ec71f086b05f12232859cee5ce7a32e6b3a3635b07f75cfbbb"
+    },
+    {
+      "path": "reference/training_code/tcn/model.py",
+      "size_bytes": 5092,
+      "sha256": "78e8bd93df7ef3d115e76c8a120ebe3a38d2c1a8799e68b281a153225881d891"
+    },
+    {
+      "path": "reference/training_code/tcn/train_core.py",
+      "size_bytes": 8919,
+      "sha256": "7c85354749195ccbd9805c101b816a174f90dc0e4ddaa769899b687ef16340ac"
+    },
+    {
+      "path": "reference/training_code/tcn/train_tcn.py",
+      "size_bytes": 452,
+      "sha256": "2eb6ad4e4575029f706960e741c43023e14cf774fa3689cafdb7bf1481e9e7e9"
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 622,
+      "sha256": "d903f5b9eb2538ca37ed134b0e02a2b6ae16fa2ae1745a64cd174fa05b25b2bf"
+    },
+    {
+      "path": "run_3d_npz.py",
+      "size_bytes": 2753,
+      "sha256": "5ba637f167a987d80de553b53c93a6a72b1d904117bcfb0f3fa13f5995b1d083"
+    },
+    {
+      "path": "run_video.py",
+      "size_bytes": 1939,
+      "sha256": "17681b2645979d626e3dd06ce947dc6fb8c5eae43659804ac80f8ca9f97d54ae"
+    },
+    {
+      "path": "src/dbn/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/dbn/__pycache__/__init__.cpython-313.pyc",
+      "size_bytes": 175,
+      "sha256": "7aeed70cc3a92352f6fb5ecad7977c55eae15f01e0a906d72cd0598d692af184"
+    },
+    {
+      "path": "src/dbn/__pycache__/model_dbn.cpython-313.pyc",
+      "size_bytes": 17033,
+      "sha256": "5becc7ffe70551707b9233e5c97a470a5c1dc51a275079af5974956dc81bbde1"
+    },
+    {
+      "path": "src/dbn/model_dbn.py",
+      "size_bytes": 14291,
+      "sha256": "5546c3a5cd44a47c5d9cd6bbca91fd913f888a82e82998009c8c12c5bd6d0ba2"
+    },
+    {
+      "path": "src/preprocessing/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/preprocessing/__pycache__/__init__.cpython-313.pyc",
+      "size_bytes": 185,
+      "sha256": "2352bb9c1c0a23708a5276c52720b07eac4d2c9d0750efc3e737cf328b1ed5a6"
+    },
+    {
+      "path": "src/preprocessing/__pycache__/skeleton.cpython-313.pyc",
+      "size_bytes": 1243,
+      "sha256": "c9656b1ce27c2ac6a4cc199bc498495917d00ab3d4e5c02c524cb0717d6aee7c"
+    },
+    {
+      "path": "src/preprocessing/__pycache__/videopose3d.cpython-313.pyc",
+      "size_bytes": 4441,
+      "sha256": "43e5a5b52c3da962393fb3f4305fff81d08fc49f7e5e14b6f89fc6c448613176"
+    },
+    {
+      "path": "src/preprocessing/__pycache__/videopose3d_model.cpython-313.pyc",
+      "size_bytes": 11521,
+      "sha256": "d2f0b05d2911e8d637d92c68b9481481eb0d23de9b7b6a63857874678e190c28"
+    },
+    {
+      "path": "src/preprocessing/__pycache__/yolo_pose.cpython-313.pyc",
+      "size_bytes": 5665,
+      "sha256": "75d7008ac9fa262b32ce09f64772fab1a5c806fed53c93d863704202555d6b5f"
+    },
+    {
+      "path": "src/preprocessing/skeleton.py",
+      "size_bytes": 669,
+      "sha256": "89c0ed8871221b87062ac3be21af68c9fd9d844b4750a253bc86226931c2a0a9"
+    },
+    {
+      "path": "src/preprocessing/videopose3d.py",
+      "size_bytes": 2547,
+      "sha256": "dcaaa618d1e63ca903e4d338ed87473a783b4b74414a1751b42e3041a7f0d248"
+    },
+    {
+      "path": "src/preprocessing/videopose3d_model.py",
+      "size_bytes": 8304,
+      "sha256": "2973477c5babb4402006a0137ea00e7ef141b12ab2d10991db851f08b0da2e65"
+    },
+    {
+      "path": "src/preprocessing/yolo_pose.py",
+      "size_bytes": 4522,
+      "sha256": "103efcb6f1ab3af30aeb830779fe3947fd42900fa1d7f25745f4f61b575e1b12"
+    },
+    {
+      "path": "src/runtime/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/runtime/__pycache__/__init__.cpython-313.pyc",
+      "size_bytes": 179,
+      "sha256": "d24d1f79171f5b1bfb489720a97fa1b3146b2cd5b76b6cb5928c7259ed4a4643"
+    },
+    {
+      "path": "src/runtime/__pycache__/dbn_filter.cpython-313.pyc",
+      "size_bytes": 2637,
+      "sha256": "4173ffc86a8c7e4bca25599b03b9fedb912a9f82609ec09e176c444f853ea2e6"
+    },
+    {
+      "path": "src/runtime/__pycache__/engine.cpython-313.pyc",
+      "size_bytes": 10941,
+      "sha256": "cf3136ba1e4084810a3731918eb0be6b5b92114b20e0f1df70bfe5131e1a2d71"
+    },
+    {
+      "path": "src/runtime/__pycache__/env_info.cpython-313.pyc",
+      "size_bytes": 2928,
+      "sha256": "8af6cf68f2016fe13911c5e9ed8c1882a22dc96f4ac7d34c3799eeb01cbc2942"
+    },
+    {
+      "path": "src/runtime/__pycache__/schemas.cpython-313.pyc",
+      "size_bytes": 1904,
+      "sha256": "4484076edf8f5db5f3ef53937c73fc101d0ddbb8e1c6b1f4c2acb48e011a5716"
+    },
+    {
+      "path": "src/runtime/__pycache__/video_pipeline.cpython-313.pyc",
+      "size_bytes": 3215,
+      "sha256": "a8cfe5bdf856f7b9a224ab381bd517fd6f49c3fc0a731fe0520bff333022d150"
+    },
+    {
+      "path": "src/runtime/dbn_filter.py",
+      "size_bytes": 1216,
+      "sha256": "c218e7e0f11bd85aa37eb2843cc89697fa62534c72af23132f05694b32066f8e"
+    },
+    {
+      "path": "src/runtime/engine.py",
+      "size_bytes": 11629,
+      "sha256": "c872922c43e3a91eedfc9630da76b37cf95576c43d4531ca3897ebeb8133016d"
+    },
+    {
+      "path": "src/runtime/env_info.py",
+      "size_bytes": 1638,
+      "sha256": "3e274a3e13a2dd83867fe14616d59c8b1b2f6241cc9879a8a81e9cb24cd733bd"
+    },
+    {
+      "path": "src/runtime/json_io.py",
+      "size_bytes": 780,
+      "sha256": "9d925123721c971fb04283bf1133919734f4b0bfc352b19b860eec6f87169ca1"
+    },
+    {
+      "path": "src/runtime/schemas.py",
+      "size_bytes": 1597,
+      "sha256": "86b6b7e20d99b7a0873a7b5e92f99010b1d070ad6ce1e7852652cc1d72925806"
+    },
+    {
+      "path": "src/runtime/video_pipeline.py",
+      "size_bytes": 1893,
+      "sha256": "c57ba237cde178b2fdb24674dd1949e00d17636f299f2621700dbbac21905fb1"
+    },
+    {
+      "path": "src/stds/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/stds/__pycache__/__init__.cpython-313.pyc",
+      "size_bytes": 176,
+      "sha256": "5afb68fe5f1a628ef0119e3455ad35eb5aedd7b9293a109515dc1f877d13b0da"
+    },
+    {
+      "path": "src/stds/__pycache__/model_hybrid.cpython-313.pyc",
+      "size_bytes": 17846,
+      "sha256": "bcbd4fb22dd573ddebb0659a399da182f977919ec3e0acdb0785e546653ed4f0"
+    },
+    {
+      "path": "src/stds/model_hybrid.py",
+      "size_bytes": 11240,
+      "sha256": "552f9f214e09b44a4d76446e0ada2053895d8d0ba23a3b5e3f787bb1fa6911e5"
+    },
+    {
+      "path": "src/tcn/__init__.py",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/tcn/__pycache__/__init__.cpython-313.pyc",
+      "size_bytes": 175,
+      "sha256": "d57dd334f579baa73d894f8e4a1fc0402530bc5a892a472e2a138a7c080e14d8"
+    },
+    {
+      "path": "src/tcn/__pycache__/model.cpython-313.pyc",
+      "size_bytes": 6990,
+      "sha256": "eb6422dca4c317e06fc2ff7e65f9f3d0fe284431cb5eb72b8ac9a942718aa109"
+    },
+    {
+      "path": "src/tcn/model.py",
+      "size_bytes": 5092,
+      "sha256": "78e8bd93df7ef3d115e76c8a120ebe3a38d2c1a8799e68b281a153225881d891"
+    },
+    {
+      "path": "tests/smoke_test_skeleton.py",
+      "size_bytes": 1157,
+      "sha256": "b97a603a287387665eef8d2bf055adaf8a506a11ec93fa9cbf8ab06f909d8f17"
+    },
+    {
+      "path": "tests/test_phase1.py",
+      "size_bytes": 2395,
+      "sha256": "92c44f908e0d30094da7cb4da67ff64d5b98ff7cc9fca00b4f44c5d35be49d34"
+    },
+    {
+      "path": "tests/videos/Video (14).mp4",
+      "size_bytes": 13514200,
+      "sha256": "04bfd7827529f616ea44a80c1913c75f70d8c20e12feba068305fad36fce03ee"
+    },
+    {
+      "path": "tools/parity_check.py",
+      "size_bytes": 6954,
+      "sha256": "4d39cbf00d20e211773c873bcdd21e9664cf6d392bf007f275c6ccf57d093604"
+    },
+    {
+      "path": "unified_3d_all_envs.npz",
+      "size_bytes": 27164453,
+      "sha256": "be3d870d98def03d8d52f7894127e6f4c4ec391f968f253d2a294d8f1682930e"
+    }
+  ],
+  "self_hash_excluded": true
+}

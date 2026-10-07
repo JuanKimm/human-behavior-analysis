@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "candidate": "0.2.1-candidate.002",
+  "created_utc": "2026-09-29T13:34:21.056112+00:00",
+  "strict_environment_preflight_in_build_container": {
+    "expected": "FAIL because build container is not pc_colab_preprocessing_v1",
+    "result": "FAIL_AS_EXPECTED"
+  },
+  "engineering_override_preflight": "PASS",
+  "unit_contract_tests": {
+    "count": 16,
+    "result": "PASS"
+  },
+  "validation_direct3d_core": {
+    "video_key": "3AI_Office_01::Video (2)",
+    "result": "PASS",
+    "gt_leakage_check": "PASS"
+  },
+  "protected_model_hashes": {
+    "assets/yolo/yolo26x-pose.pt": "08ed9e01d22a6f248b04f2f9992016aca9a32250b9ab57057d886a09d026700d",
+    "assets/videopose3d/pretrained_h36m_detectron_coco.bin": "d3219e005b50591f694da5cbaf6849f060d6b2cf895864a779f8a992ac63a232",
+    "checkpoints/tcn/best.pt": "6eb1a9216f2dd67a3c8d445a3801f3f7877613ff14f15b21cd5c672ea51fcad2",
+    "checkpoints/stds/best.pt": "beb548f5ba52978febf3aac8f58b89ebec1ab8cb2505ad195fe7745e0d9abc5c",
+    "checkpoints/dbn/final_dbn.npz": "7d80e3aebed9df353539d61a9eae8a749e7ce36d5c886f51271ed246fc4a78a7"
+  },
+  "protected_model_count": 5,
+  "notes": [
+    "No seed42 test video was executed.",
+    "Candidate_002 changes environment enforcement/provenance/docs/package metadata, not core model algorithms."
+  ]
+}

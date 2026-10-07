@@ -1,0 +1,21 @@
+issue_id,batch,status,candidate_change,verification
+ISS-001,A,IMPLEMENTED_PENDING_S3_RAW_E2E,Run bundle + run_001/run_002 + success-after-save; overlay path added,Unit bundle/repeat PASS; raw-video overlay pending Local/Colab S3
+ISS-002,A,IMPLEMENTED,Separated evaluator + GT late-binding + timeline/metrics/transition,Validation direct-3D evaluate PASS
+ISS-003,B,IMPLEMENTED_PENDING_COLAB,Colab subprocess check=True fail-fast,Static notebook review; actual Colab pending S3
+ISS-004,B,IMPLEMENTED,Removed bundled test video/default fixture + test guard,Test guard rejects seed42 test without --allow-test
+ISS-005,A,IMPLEMENTED,STDS pre/post-CRF result + research/product profile,Contract tests PASS
+ISS-006,A,IMPLEMENTED,dd_r01 public API + pyproject packaging,Editable no-build-isolation install/import PASS
+ISS-007,A,IMPLEMENTED,Model-level length status and top partial/insufficient_length,Boundary tests PASS
+ISS-008,B,IMPLEMENTED,Detached RELEASE_MANIFEST + fail-fast checker,check_module PASS after manifest build
+ISS-009,B,IMPLEMENTED,Separated package/model/dataset/split/output-schema versions,Manifest/config audit
+ISS-010,A,IMPLEMENTED,run_manifest/environment/validation_status/output hashes,Validation direct-3D bundle PASS
+ISS-011,B,IMPLEMENTED_PENDING_ENV_E2E,Local/Colab guides and device behavior aligned,Actual Local/Colab E2E pending S3
+ISS-012,B,IMPLEMENTED,Parity selects env::video_name/video_idx,Parity PASS on 3AI_Office_01::Video (1)
+ISS-013,B,IMPLEMENTED,Removed legacy bundled sample result,File inventory check
+ISS-014,C,IMPLEMENTED_PENDING_ENV_E2E,pyproject constraints + validated environment registry,Actual dependency reproduction pending S3 environments
+ISS-015,C,IMPLEMENTED,Stride4 reconstruction/provenance tool,Counts reproduce 23962/4924/5897
+ISS-016,C,IMPLEMENTED,Remove __pycache__/pyc from release candidate,Final ZIP inventory check
+ISS-017,C,IMPLEMENTED,Config applied to runtime schedule + pose + VideoPose3D settings,Unit/static checks PASS
+ISS-018,A,IMPLEMENTED,Predict hash-suffixed key + evaluate env::video key + parity unique key,Repeat/lookup tests PASS
+ISS-019,B,IMPLEMENTED,Expanded contract/bundle/test-protection/profile/API tests,14 unit/contract tests PASS
+ISS-020,B,IMPLEMENTED,CURRENT_VALIDATION_STATUS separates historical Phase1 from current authority,Document/static audit
