@@ -1,0 +1,101 @@
+{
+  "validated_utc": "2026-10-07T18:20:38.146298+00:00",
+  "baseline_commit": "e8b682dda852b771db2bd4cd62c99e036b004d2a",
+  "device": "cpu",
+  "python": "3.12.14",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "torch_runtime": "2.13.0+cu130",
+  "cuda_available": false,
+  "direct_dependencies": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "ultralytics": "8.4.70",
+    "torch": "2.13.0",
+    "torchvision": "0.28.0",
+    "scikit-learn": "1.8.0",
+    "lap": "0.5.12",
+    "torchreid": {
+      "version": "1.4.0",
+      "commit": "f8cd150fdf77e8d9e1ed143b7f308c2c609ded50"
+    }
+  },
+  "checks": [
+    {
+      "command": "python mtmct_delayed_realtime_v4-2-2.py --self-test --test-botsort",
+      "tests": 77,
+      "status": "passed",
+      "skipped": 0
+    },
+    {
+      "command": "python -m unittest discover -s tests -p test_*.py",
+      "tests": 26,
+      "new_integration_tests": 10,
+      "status": "passed",
+      "skipped": 0
+    }
+  ],
+  "smokes": [
+    {
+      "mode": "replay_pose_actual_downstream_models",
+      "frames": 84,
+      "global_ids": [
+        1,
+        2
+      ],
+      "sequences": 4,
+      "valid_risk_rows": 36,
+      "output_video_frames": 84,
+      "status": "passed"
+    },
+    {
+      "mode": "actual_yolo_empty_scene",
+      "frames": 2,
+      "global_ids": [],
+      "sequences": 0,
+      "valid_risk_rows": 0,
+      "output_video_frames": 2,
+      "status": "passed"
+    }
+  ],
+  "source_sha256": {
+    "mtmct_delayed_realtime_v4-2-2.py": "ddb0b1e74bc1da97c189c766ce8cfebc53244b0bdfde7c99e6a25f44881dc5ec",
+    "run_mtmct_fall.py": "e4c65716084f1187cc8130444285a1845bd66602f62358dc67b6f52a418137f4",
+    "requirements-integration.txt": "c97c2c9e67dfdbe8503e4cc38b671329d3fa8b255de954409f98daf82cbaccbe",
+    "tests/test_mtmct_integration.py": "7c07a6da4297ac2193db31d4e692da0497e8be6912d47d416b0482349f4e97b3",
+    "tools/smoke_mtmct_integration.py": "1a9b76d778ee682f61968eb1bdbbba3cdaaf948f7b9ba8e87222fb3c586c71ca",
+    "src/mtmc_fall/__init__.py": "4f0b535f156947214c79ba71ae70de144123c4a01a9e3e9283b86709687bcc3a",
+    "src/mtmc_fall/contracts.py": "b6de6295c8c793a1753d549bd48e9b3331a22803eba39f3cbf72db3431530013",
+    "src/mtmc_fall/environment.py": "6d6689bb75c5ad13c6f1924c7bebfe32b86f9c110dd2c864d39f65e14e6a3dfe",
+    "src/mtmc_fall/fall.py": "461103bc4b2e920261312a1a951af10163919782c1bd3353f5185f04889f5e1d",
+    "src/mtmc_fall/output.py": "6d3064e923279bc84e3b34dd003d7c370871dee6b9b7b2be3086005ba4b805d0",
+    "src/mtmc_fall/pipeline.py": "9a4b913fe349d615ca2ae84e31bc98ca3d60a04bc4f270433b10618b2b5509f1",
+    "src/mtmc_fall/tracking.py": "bf5460c285fe36511c1404cfbd57f5b82f42e3e9b9bdcb383aeaf65e92970289",
+    "src/mtmc_fall/video.py": "37437b81871377b44989194ed8d5275ba84f1853644ae93b7e17fd3d34cd0199"
+  },
+  "log_evidence": {
+    "legacy-regression.log": {
+      "sha256": "49617ea1093f0995ff4b2313a88ac9271dd2d36134e3ec2a9357c5dcc81033cc",
+      "result": "OK"
+    },
+    "all-tests.log": {
+      "sha256": "8ca9a4a1d0e442d0ce865ec4753ff7621fb02137fcc40407b9ad798c6e6fa77f",
+      "result": "OK"
+    },
+    "replay-smoke.log": {
+      "sha256": "2b73bacc7a9be143e9861d056094c2e612df793eaf73b0d8113228576171b044",
+      "result": "{\"mode\": \"replay_pose_actual_downstream_models\", \"frames\": 84, \"global_ids\": [1, 2], \"sequences\": 4, \"valid_risk_rows\": 36, \"output_video_frames\": 84, \"status\": \"passed\"}"
+    },
+    "yolo-smoke.log": {
+      "sha256": "34d530b1d2105f3dec5b1c120ce943855b0b2c56c17d207047abe9ca8f5bdb22",
+      "result": "{\"mode\": \"actual_yolo_empty_scene\", \"frames\": 2, \"global_ids\": [], \"sequences\": 0, \"valid_risk_rows\": 0, \"output_video_frames\": 2, \"status\": \"passed\"}"
+    }
+  },
+  "limitations": [
+    "No real multi-person video accuracy or ID-switch evaluation",
+    "No GPU validation",
+    "No protected final test-split evaluation",
+    "Replay smoke substitutes only detector poses; actual downstream models are used",
+    "Actual YOLO smoke covers an empty scene only",
+    "torchreid installed with documented runtime subset; its declared training/lint dependencies are not fully installed"
+  ]
+}
