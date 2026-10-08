@@ -10,7 +10,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
 from mtmc_fall.contracts import TrackedPose, PoseSequence, SequenceCollector
-from mtmc_fall.fall import OfflineFallAnalyzer, select_camera_results
+from mtmc_fall.fall import OriginalVideoFallAnalyzer
 from mtmc_fall.tracking import load_tracker, PosePredictor, TrackingAdapter
 from mtmc_fall.video import PairedVideoReader
 
@@ -128,57 +128,53 @@ class IntegrationContracts(unittest.TestCase):
         self.assertEqual([p.keypoints[0, 0] for p in poses], [110, 310, 110, 310])
         self.assertTrue(all(p.partial for p in poses))
 
-    def test_lifter_coordinates_confidence_and_absolute_window_mapping(self):
-        sequence = PoseSequence(tuple(pose(i) for i in range(20, 100)), 30)
-        seen = []
-        class Lifter:
-            def lift(self, xy, width, height):
-                seen.append((xy.copy(), width, height)); return np.zeros((len(xy), 17, 3), np.float32)
-        class Engine:
-            config = {'pose_quality': {'confidence_threshold': .25}}
-            def infer_skeleton_sequence(self, skel, **kwargs):
-                seen.append(kwargs)
-                result = dict(frame_count=len(skel), fps=30, tcn=[], stds=[], dbn=[
-                    dict(window_start=0, window_end=63, label='Normal', status='ok', probabilities=[1, 0, 0]),
-                    dict(window_start=16, window_end=79, label='Danger', status='ok', probabilities=[0, 0, 1])])
-                return SimpleNamespace(to_dict=lambda: result)
-        _, _, timeline = OfflineFallAnalyzer(Lifter(), Engine()).analyze(sequence)
-        self.assertEqual(seen[0][1:], (1280, 720)); np.testing.assert_array_equal(seen[0][0], np.full((80, 17, 2), 110))
-        np.testing.assert_allclose(seen[1]['confidence'], .9)
+    def test_original_module_receives_whole_video_once(self):
+        from types import ModuleType
+        calls = []
+        arrays = dict(skeletons_3d=np.zeros((80, 17, 3)), confidence=np.zeros((80, 17)),
+                      detected=np.zeros(80, dtype=bool))
+        inference = dict(frame_count=80, fps=30, tcn=[], stds=[], dbn=[
+            dict(window_start=0, window_end=63, label='Danger', status='ok', probabilities=[0, 0, 1])])
+        class Module:
+            def __init__(self, root, device): calls.append(('init', root, device))
+            def run_video(self, path):
+                calls.append(('run', path))
+                return SimpleNamespace(to_dict=lambda: inference), arrays
+        module = ModuleType('runtime.video_pipeline'); module.VideoInferenceModule = Module
+        with patch.dict(sys.modules, {'runtime.video_pipeline': module}):
+            analyzer = OriginalVideoFallAnalyzer(ROOT, 'cpu')
+        result, got, timeline = analyzer.analyze_video('camera1.mp4', 1, 80, 30)
+        analyzer.analyze_video('camera2.mp4', 2, 80, 30)
+        self.assertIs(result, inference); self.assertIs(got, arrays)
+        self.assertEqual([c[0] for c in calls], ['init', 'run', 'run'])
+        self.assertEqual(len(timeline), 80)
         self.assertEqual(timeline[62]['status'], 'warmup')
-        self.assertEqual(timeline[63]['window_start'], 20)
-        self.assertEqual(timeline[63]['decision_frame'], 83)
-        self.assertEqual(timeline[-1]['label'], 'Danger')
-        self.assertEqual(timeline[-1]['probabilities'], [0, 0, 1])
+        self.assertEqual(timeline[63]['label'], 'Danger')
+        self.assertEqual(timeline[-1]['decision_frame'], 63)
+        self.assertNotIn('global_id', timeline[-1])
+        self.assertNotIn('selected_camera_id', timeline[-1])
 
-    def test_shared_models_reset_dbn_between_people_and_cameras(self):
-        from runtime.engine import FallRiskInferenceEngine
-        engine = FallRiskInferenceEngine(ROOT, device='cpu')
-        class Lifter:
-            def lift(self, xy, width, height):
-                return np.zeros((len(xy), 17, 3), np.float32)
-        analyzer = OfflineFallAnalyzer(Lifter(), engine)
-        model_ids = (id(engine.tcn), id(engine.stds), id(engine.dbn.model))
-        a = PoseSequence(tuple(pose(i, gid=1, cam=1) for i in range(64)), 30)
-        b = PoseSequence(tuple(pose(i, gid=2, cam=2) for i in range(64)), 30)
-        _, first, _ = analyzer.analyze(a)
-        # A deliberately invalid previous posterior must never reach the next person's DBN.
-        engine.dbn.prev_log_post = np.full(3, np.nan)
-        _, second, _ = analyzer.analyze(b)
-        np.testing.assert_array_equal(first['dbn'][0]['probabilities'], second['dbn'][0]['probabilities'])
-        self.assertEqual(model_ids, (id(engine.tcn), id(engine.stds), id(engine.dbn.model)))
+    def test_original_adapter_rejects_misaligned_output(self):
+        analyzer = object.__new__(OriginalVideoFallAnalyzer)
+        analyzer.module = SimpleNamespace(run_video=lambda path: (
+            SimpleNamespace(to_dict=lambda: dict(frame_count=1, fps=30)), {}))
+        with self.assertRaises(RuntimeError): analyzer.analyze_video('x', 1, 2, 30)
+        with self.assertRaises(RuntimeError): analyzer.analyze_video('x', 1, 1, 25)
 
-    def test_camera_selection_uses_pose_quality_not_risk(self):
-        def row(cam, label, valid, mean, status='ok'):
-            return dict(frame_index=70, timestamp=70/30, global_id=1, camera_id=cam, label=label,
-                        status=status, probabilities=[1, 0, 0], decision_frame=63,
-                        pose_quality=dict(valid_joint_ratio=valid, mean_joint_confidence=mean))
-        a, b = row(1, 'Normal', 1., .8), row(2, 'Danger', .9, .99)
-        selected = select_camera_results([b, a])[0]
-        self.assertEqual(selected['selected_camera_id'], 1); self.assertEqual(len(selected['cameras']), 2)
-        a['status'] = 'insufficient_pose'; self.assertEqual(select_camera_results([a, b])[0]['selected_camera_id'], 2)
-        b['status'] = 'warmup'; self.assertIsNone(select_camera_results([a, b])[0]['label'])
-        with self.assertRaises(ValueError): select_camera_results([a, a])
+    def test_output_saves_original_arrays_and_reserves_risk_colors(self):
+        import json, tempfile
+        from mtmc_fall.output import save_video_result, TRACK_COLORS, RISK_COLORS
+        self.assertEqual(RISK_COLORS['Precursor'], (0, 165, 255))
+        self.assertEqual(RISK_COLORS['Danger'], (0, 0, 255))
+        self.assertFalse(set(TRACK_COLORS) & set(RISK_COLORS.values()))
+        data = dict(skeletons_3d=np.arange(2*17*3).reshape(2,17,3),
+                    confidence=np.zeros((2,17)), detected=np.array([True,False]))
+        inference = dict(frame_count=2, fps=30, status='insufficient_length')
+        with tempfile.TemporaryDirectory() as td:
+            save_video_result(Path(td), 1, inference, data)
+            with np.load(Path(td)/'camera1.npz') as saved:
+                for key in data: np.testing.assert_array_equal(saved[key], data[key])
+            self.assertEqual(json.loads((Path(td)/'camera1.json').read_text()), inference)
 
 
 if __name__ == '__main__': unittest.main()

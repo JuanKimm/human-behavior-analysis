@@ -23,6 +23,10 @@ class ReplayPose:
         for cam in (1, 2):
             feet = cv2.perspectiveTransform(np.array([[[3., 1.]], [[5., 1.]]]), np.linalg.inv(calibration.h[cam])).reshape(2, 2)
             self.boxes[cam] = np.array([[x - 40, y - 220, x + 40, y] for x, y in feet], np.float32)
+    def __call__(self, frame, **kwargs):
+        # The original extractor calls its detector on one frame at a time.
+        return self.predict(source=[frame], **kwargs)
+
     def predict(self, source, **kwargs):
         import torch
         from ultralytics.engine.results import Results
@@ -64,20 +68,22 @@ def main():
         assert [row['frame_index'] for row in tracking] == list(range(n))
         risks = [json.loads(line) for line in (run_dir / 'risks.jsonl').read_text().splitlines()]
         if args.real_yolo:
-            assert summary['global_ids'] == [] and summary['sequences'] == 0
+            assert summary['global_ids'] == [] and summary['fall_videos'] == 2
         else:
-            assert len(summary['global_ids']) == 2 and summary['sequences'] == 4, summary
+            assert len(summary['global_ids']) == 2 and summary['fall_videos'] == 2, summary
             assert summary['valid_risk_rows'] > 0
-            assert all(row['selected_camera_id'] == 1 for row in risks if row['status'] == 'ok')
-            for file in (run_dir / 'sequences').glob('*.npz'):
-                with np.load(file) as data:
-                    assert len(data['skeletons_3d']) == len(data['frame_indices'])
-                    assert (np.diff(data['frame_indices']) == 1).all()
+        assert len(risks) == 2 * n
+        assert all('global_id' not in row and 'selected_camera_id' not in row for row in risks)
+        for camera_id in (1, 2):
+            with np.load(run_dir / 'fall' / f'camera{camera_id}.npz') as data:
+                assert len(data['skeletons_3d']) == n
+                assert len(data['detected']) == n
+                assert bool(data['detected'].any()) == (not args.real_yolo)
         cap = cv2.VideoCapture(str(run_dir / 'combined_fall.mp4')); count = 0
         while cap.read()[0]: count += 1
         cap.release(); assert count == n, count
         print(json.dumps(dict(mode='actual_yolo_empty_scene' if args.real_yolo else 'replay_pose_actual_downstream_models',
-            frames=n, global_ids=summary['global_ids'], sequences=summary['sequences'],
+            frames=n, global_ids=summary['global_ids'], fall_videos=summary['fall_videos'],
             valid_risk_rows=summary['valid_risk_rows'], output_video_frames=count, status='passed')))
 
 
