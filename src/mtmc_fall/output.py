@@ -5,6 +5,31 @@ import numpy as np
 from .video import PairedVideoReader
 
 
+# OpenCV uses BGR (blue, green, red), not RGB.
+# Orange and red are reserved exclusively for risk states.
+RISK_COLORS = {
+    'Precursor': (0, 165, 255),  # orange
+    'Danger': (0, 0, 255),       # red
+}
+TRACK_COLORS = (
+    (0, 200, 0),      # green
+    (255, 180, 0),    # sky blue
+    (255, 80, 80),    # blue
+    (220, 80, 180),   # purple
+    (200, 200, 0),    # cyan
+    (100, 210, 150),  # mint green
+    (255, 150, 200),  # lavender
+    (180, 210, 100),  # turquoise
+)
+
+
+def overlay_color(global_id, risk):
+    """Use the selected global risk in both views; otherwise use a stable ID color."""
+    if risk.get('status') == 'ok' and risk.get('label') in RISK_COLORS:
+        return RISK_COLORS[risk['label']]
+    return TRACK_COLORS[(int(global_id) - 1) % len(TRACK_COLORS)]
+
+
 def write_json(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False), encoding='utf-8')
 
@@ -40,7 +65,7 @@ def render_video(paths, output_path, poses, risks, legacy, display_width=1280):
             for p in by_frame[packet.sequence]:
                 frame = packet.frames[p.camera_id]
                 risk = decisions.get((packet.sequence, p.global_id), {})
-                color = legacy.gid_color(p.global_id)
+                color = overlay_color(p.global_id, risk)
                 x1, y1, x2, y2 = np.rint(p.bbox).astype(int)
                 cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
                 label = risk.get('label') or 'N/A'

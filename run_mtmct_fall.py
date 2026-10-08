@@ -4,11 +4,11 @@ import sys
 
 ROOT = Path(__file__).resolve().parent
 # Must already be synchronized. No frame skipping, reuse, offset, or drift correction.
-VIDEO1 = ROOT / 'videos/color7-415.mp4'
-VIDEO2 = ROOT / 'videos/color7-435.mp4'
+VIDEO1 = ROOT / 'videos/test1.mp4'
+VIDEO2 = ROOT / 'videos/test1_black.mp4'
 YOLO_WEIGHTS = ROOT / 'assets/yolo/yolo26x-pose.pt'
 REID_WEIGHTS = ROOT / 'weights/osnet_x1_0_msmt17.pth'
-OUTPUT_ROOT = ROOT / 'outputs/mtmc_fall'
+OUTPUT_ROOT = ROOT / 'outputs/mtmc_fall_1-1'
 DEVICE = 'cpu'
 IMGSZ = 640
 WRITE_VIDEO = True
